@@ -23,6 +23,27 @@ body {
 	text-align:center;
 }
 
+#center {
+	display:none;
+}
+
+#details  {
+
+}
+
+#gravatar_img {
+	border:0px;
+	border-radius:50%;
+	width:50%;
+	height:50%;
+	display:none;
+	box-shadow: 0px 0px 15px rgba(111, 111, 111, 0.5);
+}
+
+#num-repos{
+	margin:0;
+}
+
 .repo {
 	width:90px;
 	height:90px;
@@ -30,6 +51,7 @@ body {
 
 a {
 	text-decoration:none;
+	color:#665;
 }
 
 .repo h2{

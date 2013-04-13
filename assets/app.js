@@ -1,4 +1,9 @@
+var owner = 'ozh';
+
+
+
 var start_angle = 0;
+
 	
 $(document).ready(function($) {
 	get_repos();
@@ -11,13 +16,12 @@ function get_repos(){
 	// https://api.github.com/users/ozh/repos
 	// http://127.0.0.1/repos.json.php
     $.getJSON('http://127.0.0.1/repos.json.php?user=leo', function( repos ){
-		$('#num-repos').text( repos.length );
+		$('#num-repos b').text( repos.length );
 		
 		$.each(repos, function (i, repo) {
 			var lang = '';
 			if( repo.language != null ){
 				repo.language = repo.language.replace( '+', 'plus' );
-				console.log( repo.language );
 				lang = '<span class="repo_details repo_lang '+repo.language+'">' + repo.language + '</span>';
 			}
 			var $item = $('<div class="repo" id="repo_'+i+'"/>');
@@ -29,6 +33,8 @@ function get_repos(){
 			$item.appendTo('#clock');
 			
 		});
+		
+		$('#gravatar_img').attr( 'src', 'https://secure.gravatar.com/avatar/'+repos[0].owner.gravatar_id+'?s=512' ).toggle();
 		
 		place_divs();
 
