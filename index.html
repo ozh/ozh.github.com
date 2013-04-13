@@ -3,29 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <title>ozh.github.com</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="assets/style.css">
 <link href='http://fonts.googleapis.com/css?family=Montserrat+Alternates:400,700' rel='stylesheet' type='text/css'>
-<style type="text/css">
-body{
-	background:#F0DB40;
-	color:#665;
-	font-family: 'Montserrat Alternates', sans-serif;
-}
-#ozhtocat{
-	color:#005;
-}
-#img {
-	zbackground:red;
-	width: 512px;
-    margin: 50px auto;
-	ztext-align:center;
-}
-
-</style>
 </head>
 <body>
 
-<div id="img">
-	<img src="ozhtocat.png" alt="ozhtocat" />
+<div id="img" style="display:none";>
+	<img src="assets/ozhtocat.png" alt="ozhtocat" />
 	<h1>The <span id="ozhtocat">ozhtocat</span> ! Also, there's nothing to see here.</h1>
 	<h2>But there is life there:</h2>
 	<p>Ozh on <a href="http://github.com/ozh">Github</a>,
@@ -33,5 +18,16 @@ body{
 	<a href="http://ozh.org/">the interweb</a>
 </div>
 
+<div id="wrap">
+	<div id="clock">
+		<p id="center" class="stats">
+			<a href="https://github.com/ozh/repositories"><b id="num-repos">View</b> public repos</a>
+		</p>
+	</div>
+</div>
+
+
+
+<script src="assets/app.js"></script>
 
 </body>

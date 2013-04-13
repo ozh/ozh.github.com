@@ -1,0 +1,74 @@
+body {
+	color:#665;
+    padding: 20px 10px;
+    margin: 0 auto;
+    background: #F0DB40;
+	font-family: 'Montserrat Alternates', sans-serif;
+}
+
+#wrap {
+	text-align: center;
+	width:100%;
+	margin-top:50px;
+}
+
+#clock {
+	margin:0 auto;
+	width:300px;
+	height:300px;
+	border-radius:9001px;
+	border:9px solid #BF1111;
+	padding:0;
+	background:#fff;
+	text-align:center;
+}
+
+.repo {
+	width:90px;
+	height:90px;
+}
+
+a {
+	text-decoration:none;
+}
+
+.repo h2{
+	width:100px;
+	height:100px;
+	border:10px solid #888;
+	position:relative;
+	background:#fff;
+	border-radius:400px;
+	font-size:100%;
+	text-align:center;
+	color:#666;
+	margin:0;
+	word-break:break-all;
+	overflow:hidden;
+	display:table;
+}
+
+.repo a:hover h2{
+	border-width:8px;
+	z-index:22;
+	box-shadow: 1px 1px 20px #666;
+}
+
+.repo h2 p {
+	display: table-cell; 
+	vertical-align: middle; 
+	text-align: center;
+}
+
+.repo_details{
+	display:none;
+}
+
+.repo a.PHP       h2{ border-color:#3472BC; }
+.repo a.Python h2{ border-color:#BC348F;}
+.repo a.C           h2{ border-color:#15A209;}
+.repo a.Cplusplus h2{ border-color:#A26409;}
+.repo a.JavaScript h2{ border-color:#E115C5;}
+.repo a.Shell h2{ border-color:#D0C2C7;}
+.repo a.Ruby h2{ border-color:#B60800;}
+
