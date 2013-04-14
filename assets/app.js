@@ -1,45 +1,50 @@
 var owner = 'ozh';
-
-
-
 var start_angle = 0;
-
 	
 $(document).ready(function($) {
 	get_repos();
+	
+	$(window).resize(function() {
+		place_divs(  );
+		place_details( 'init' );
+	});
 
 	
-	// bind resize with place_divs
+	// bind resize with place_divs & place_details
 });
 
 function get_repos(){
-	// https://api.github.com/users/ozh/repos
-	// http://127.0.0.1/repos.json.php
-    $.getJSON('http://127.0.0.1/repos.json.php?user=leo', function( repos ){
+    $.getJSON('https://api.github.com/users/'+owner+'/repos', function( repos ){
 		$('#num-repos b').text( repos.length );
 		
 		$.each(repos, function (i, repo) {
 			var lang = '';
 			if( repo.language != null ){
-				repo.language = repo.language.replace( '+', 'plus' );
+				repo.language = repo.language.replace( '++', 'plusplus' );
 				lang = '<span class="repo_details repo_lang '+repo.language+'">' + repo.language + '</span>';
 			}
 			var $item = $('<div class="repo" id="repo_'+i+'"/>');
 			var $link = $('<a class="box '+repo.language+'" href="' + repo.html_url + '" />');
 			$link.append('<h2 class="name '+repo.language+'"><p>' + repo.name + '</p></h2>');
-			$link.append('<span class="repo_details repo_stars">' + repo.watchers + ' &#9733;</span>' + lang + '</p>');
+			$link.append('<span class="repo_details repo_stars">' + repo.watchers + '</span>' + lang);
 			$link.append('<span class="repo_details repo_desc">' + repo.description + '</span>');
+			$link.append('<span class="repo_details repo_forks">' + repo.forks_count + '</span>');
+			$link.append('<span class="repo_details repo_updated">' + repo.updated_at + '</span>');
+			$link.append('<span class="repo_details repo_url">' + repo.html_url + '</span>');
 			$link.appendTo($item);
 			$item.appendTo('#clock');
+			$item.on( "click", function(){
+				place_details( $(this).attr('id') );
+				return false;
+			});
 			
 		});
 		
-		$('#gravatar_img').attr( 'src', 'https://secure.gravatar.com/avatar/'+repos[0].owner.gravatar_id+'?s=512' ).toggle();
+		$('#gravatar_img').attr( 'src', 'https://secure.gravatar.com/avatar/'+repos[0].owner.gravatar_id+'?s=512' ).show();
 		
-		place_divs();
+		place_divs(  );
 
 	});
-
 }
 
 function place_divs(){
@@ -53,7 +58,7 @@ function place_divs(){
 	var x = 0, y = 0, angle = start_angle;
 	
 	// Get clock width, top, left, border
-	var c_w = $('#clock').css('width').replace('px', '');
+	var c_w = $('#clock').width();
 	var c_t = $('#clock').offset().top;
 	var c_l = $('#clock').offset().left;
 	var c_b = parseInt( $('#clock').css('border-left-width') );
@@ -80,10 +85,63 @@ function place_divs(){
 		'margin-top':  parseInt( c_w / 2 - center_h / 2 ) + 'px',
 		'margin-left': parseInt( c_w / 2 - center_w / 2 ) + 'px'
 	} );
+	
+	// Place #details
+	place_details( 'init' )
 }
 
-// Shuffle array
-function shuffle(o){ //v1.0
-    for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
-};
+// Place #details
+function place_details( id ) {
+	// Fill in details
+	if( id !== 'init' ) {
+		$('#details').show();
+		$('#center').hide();
+		$('#details #name').text( $('#'+id+' .name').text() );
+		$('#details #lang').text( $('#'+id+' .repo_lang').text() );
+		$('#details a').attr('href', $('#'+id+' .repo_url').text() );
+		$('#details #stars strong').text( $('#'+id+' .repo_stars').text() );
+		$('#details #forks strong').text( $('#'+id+' .repo_forks').text() );
+		$('#details #desc').text( $('#'+id+' .repo_desc').text() );
+		$('#details #updated').text( 'Updated ' + prettyDate( $('#'+id+' .repo_updated').text() ) );
+	}
+	
+	// Get clock width, top, left, border
+	var c_w = $('#clock').width();
+	var c_t = $('#clock').offset().top;
+	var c_l = $('#clock').offset().left;
+
+	var det_w = $('#details').width();
+	var det_h = $('#details').height();
+	$('#details').css( {
+		top  : parseInt( c_t + c_w / 2 - det_h / 2 ) + 'px',
+		left : parseInt( c_l + c_w / 2 - det_w / 2 ) + 'px',
+		'margin-top':  parseInt( c_w / 2 - det_h / 2 ) + 'px',
+		width: parseInt( c_w * 0.6 ) + 'px'
+	} );
+	
+}
+
+// Relative times -- stolen from h5bp
+function prettyDate(rawdate) {
+	var date, seconds, formats, i = 0, f;
+	date = new Date(rawdate);
+	seconds = (new Date() - date) / 1000;
+	formats = [
+		[60, 'seconds', 1],
+		[120, '1 minute ago'],
+		[3600, 'minutes', 60],
+		[7200, '1 hour ago'],
+		[86400, 'hours', 3600],
+		[172800, 'Yesterday'],
+		[604800, 'days', 86400],
+		[1209600, '1 week ago'],
+		[2678400, 'weeks', 604800]
+	];
+
+	while (f = formats[i ++]) {
+		if (seconds < f[0]) {
+			return f[2] ? Math.floor(seconds / f[2]) + ' ' + f[1] + ' ago' :  f[1];
+		}
+	}
+	return 'a while ago';
+}

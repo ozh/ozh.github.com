@@ -24,11 +24,47 @@ body {
 }
 
 #center {
-	display:none;
 }
 
-#details  {
+#details {
+	display:none;
+	max-width:70%;
+	max-height:70%;
+	margin:0 auto;
+}
 
+#details span  {
+	display: block;
+}
+
+#details #meta {
+	clear:both;
+	text-align:right;
+	overflow:hidden;
+}
+
+#details #lang, #details #stars, #details #forks {
+	float:right;
+	margin:1px 3px;
+	color:#999;
+}
+
+#details #lang{
+	line-height:150%;
+}
+
+#details #lang:after, #details #stars:after{
+	content:' \00b7 ';
+}
+
+#details #name {
+	font-size:200%;
+	word-break:break-all;
+}
+
+#details #updated {
+	font-size:80%;
+	color:#aaa;
 }
 
 #gravatar_img {
@@ -36,7 +72,6 @@ body {
 	border-radius:50%;
 	width:50%;
 	height:50%;
-	display:none;
 	box-shadow: 0px 0px 15px rgba(111, 111, 111, 0.5);
 }
 
