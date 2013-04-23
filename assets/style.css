@@ -103,12 +103,13 @@ a {
 	word-break:break-all;
 	overflow:hidden;
 	display:table;
+	box-shadow: 1px 1px 10px #666;
 }
 
 .repo a:hover h2{
 	border-width:8px;
 	z-index:22;
-	box-shadow: 1px 1px 20px #666;
+	box-shadow: 1px 1px 1px #222;
 }
 
 .repo h2 p {
@@ -129,3 +130,21 @@ a {
 .repo a.Shell h2{ border-color:#D0C2C7;}
 .repo a.Ruby h2{ border-color:#B60800;}
 
+#footer {
+	position:absolute;
+	font-size:80%;
+	bottom:0px;
+	right:0px;
+	padding:3px 10px;
+	background:#fff;
+	opacity:0.5;
+	border-top-left-radius:10px;
+}
+
+#footer code {
+	font-size:130%;
+}
+
+#footer:hover {
+	opacity:0.8;
+}
